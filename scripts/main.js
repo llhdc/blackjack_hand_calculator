@@ -9,13 +9,27 @@
    write your logic.
 */
 
-let totalValue = 0;
+
 function handValue (hand) {
+let totalValue = 0;
 
   for (let i = 0; i < hand.length; i++) {
-    totalValue = parseInt(hand[i]) + totalValue;
+    if ((parseInt(hand[i]) >= 1) && (parseInt(hand[i]) <= 10)) {
+      totalValue += parseInt(hand[i]);
+    } else if ((hand[i] === "K") || (hand[i] === "Q") || (hand[i] === "J")) {
+      totalValue += 10;
+    } else if (hand[i] === "A") {
+      if (totalValue <= 10) {
+        totalValue += 11;
+      } else {
+        totalValue += 1;
+      }
+    }
   };
-
+  
+  if ((totalValue > 21) && (hand.includes('A'))) {
+    totalValue -= 10;
+  }
   // loop over all cards and convert to total value
   // TODO: convert string value into number
     // TODO: add numerical value to totalValue
